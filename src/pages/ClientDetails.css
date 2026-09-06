@@ -1,0 +1,136 @@
+.details-back {
+  display: inline-block;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: var(--step--1);
+  margin-bottom: var(--space-3);
+}
+
+.details-back:hover {
+  color: var(--ink);
+}
+
+.details-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.details-id {
+  color: var(--ink-soft);
+  margin-bottom: 0.2rem;
+}
+
+.details-head h1 {
+  font-size: var(--step-3);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.details-panel,
+.details-qr-panel,
+.details-signature {
+  padding: var(--space-4);
+}
+
+.details-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-3);
+}
+
+.details-list dt {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  margin-bottom: 0.2rem;
+}
+
+.details-list dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.details-link-row {
+  display: flex;
+  gap: var(--space-2);
+  margin: var(--space-3) 0;
+}
+
+.details-link-input {
+  flex: 1;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+.details-actions {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.details-qr-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.details-qr-caption {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.details-signature h2 {
+  font-size: var(--step-1);
+  margin-bottom: var(--space-2);
+}
+
+.signature-img {
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+}
+
+.details-empty {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.details-notfound {
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.details-notfound h1 {
+  margin-bottom: var(--space-2);
+}
+
+.details-notfound p {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 720px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  .details-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}

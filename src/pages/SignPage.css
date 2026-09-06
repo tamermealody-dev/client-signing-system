@@ -1,0 +1,107 @@
+.sign-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-3);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(140, 47, 57, 0.05), transparent 45%),
+    var(--ink);
+  background-color: #23292a;
+}
+
+.sign-loading {
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.sign-card {
+  width: 100%;
+  max-width: 460px;
+  padding: var(--space-4);
+}
+
+.sign-eyebrow {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  margin-bottom: 0.3rem;
+}
+
+.sign-card h1 {
+  font-size: var(--step-2);
+  margin-bottom: var(--space-2);
+}
+
+.sign-intro {
+  color: var(--ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+.sign-pad-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+
+.sign-submit-error {
+  color: var(--danger);
+  font-size: var(--step--1);
+  margin-bottom: var(--space-2);
+}
+
+.sign-submit {
+  width: 100%;
+  margin-top: var(--space-1);
+  padding: 0.85rem 1.3rem;
+}
+
+.sign-status-card {
+  text-align: center;
+  padding: var(--space-5) var(--space-4);
+}
+
+.sign-status-card p {
+  color: var(--ink-soft);
+  margin-top: var(--space-2);
+}
+
+.sign-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seal-stamp {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid var(--seal);
+  color: var(--seal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step--1);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-3);
+  transform: scale(2.2) rotate(-14deg);
+  opacity: 0;
+  animation: stamp-down 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.15s forwards;
+}
+
+@keyframes stamp-down {
+  0% {
+    transform: scale(2.2) rotate(-14deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0.94) rotate(-14deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-14deg);
+    opacity: 1;
+  }
+}

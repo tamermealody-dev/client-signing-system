@@ -1,0 +1,52 @@
+:root {
+  /* Color */
+  --ink: #1c2321;
+  --ink-soft: #5b6660;
+  --ink-faint: #8a9189;
+  --paper: #f7f3ec;
+  --paper-raised: #fffdf9;
+  --rule: #ddd5c7;
+  --rule-strong: #c7bda9;
+  --seal: #8c2f39;
+  --seal-dark: #6c2129;
+  --seal-tint: #f4e3e0;
+  --signed: #2f5233;
+  --signed-tint: #e4ebe1;
+  --pending: #a97d2b;
+  --pending-tint: #f3e8d3;
+  --danger: #a4342c;
+
+  /* Type */
+  --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Scale (Elements of Typographic Style-ish, ~1.25 ratio) */
+  --step--1: 0.83rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2rem;
+  --step-4: 2.6rem;
+
+  /* Spacing */
+  --space-1: 0.4rem;
+  --space-2: 0.8rem;
+  --space-3: 1.4rem;
+  --space-4: 2.2rem;
+  --space-5: 3.4rem;
+  --space-6: 5rem;
+
+  /* Shape */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --shadow-card: 0 1px 2px rgba(28, 35, 33, 0.06), 0 8px 24px rgba(28, 35, 33, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
