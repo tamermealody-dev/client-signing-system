@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import AdminLayout from "../components/AdminLayout";
 import StatusBadge from "../components/StatusBadge";
 import QrCode from "../components/QrCode";
-import { getClientById, deleteClient, cancelClient } from "../lib/db";
+import { getClientById, deleteClient, cancelClient, extendExpiry } from "../lib/db";
 import "./ClientDetails.css";
 
 export default function ClientDetails() {
@@ -11,6 +11,7 @@ export default function ClientDetails() {
   const navigate = useNavigate();
   const [client, setClient] = useState(undefined);
   const [toast, setToast] = useState("");
+  const [editingExpiry, setEditingExpiry] = useState(false);
 
   useEffect(() => {
     getClientById(id).then(setClient);
@@ -59,6 +60,18 @@ export default function ClientDetails() {
     if (updated.success) setClient(updated.client);
   }
 
+  async function handleExpirySave(e) {
+    e.preventDefault();
+    const raw = e.target.expiresAt.value;
+    const expiresAt = raw ? `${raw}T23:59:59` : null;
+    const updated = await extendExpiry(client.id, expiresAt);
+    if (updated.success) {
+      setClient(updated.client);
+      setEditingExpiry(false);
+      setToast(expiresAt ? "Expiry date updated" : "Expiry date removed");
+    }
+  }
+
   function copyLink() {
     navigator.clipboard?.writeText(url);
     setToast("Link copied");
@@ -97,7 +110,35 @@ export default function ClientDetails() {
               <dt>Signed</dt>
               <dd>{client.signedAt ? new Date(client.signedAt).toLocaleString() : "Not yet signed"}</dd>
             </div>
+            <div>
+              <dt>Expires</dt>
+              <dd className={client.status === "expired" ? "details-expiry-overdue" : ""}>
+                {client.expiresAt ? new Date(client.expiresAt).toLocaleDateString() : "No expiry set"}
+              </dd>
+            </div>
           </dl>
+
+          {editingExpiry ? (
+            <form className="details-expiry-form" onSubmit={handleExpirySave}>
+              <input
+                type="date"
+                name="expiresAt"
+                defaultValue={client.expiresAt ? client.expiresAt.slice(0, 10) : ""}
+              />
+              <button type="submit" className="btn btn-quiet">
+                Save
+              </button>
+              <button type="button" className="btn btn-text" onClick={() => setEditingExpiry(false)}>
+                Cancel
+              </button>
+            </form>
+          ) : (
+            client.status !== "signed" && (
+              <button className="btn btn-text details-expiry-edit" onClick={() => setEditingExpiry(true)}>
+                {client.expiresAt ? "Change expiry date" : "Set an expiry date"}
+              </button>
+            )
+          )}
 
           <hr className="hairline" />
 
