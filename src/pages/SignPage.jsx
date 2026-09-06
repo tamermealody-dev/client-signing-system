@@ -6,6 +6,12 @@ import "./SignPage.css";
 
 const AGE_MIN = 0;
 const AGE_MAX = 130;
+const WARNING_WINDOW_DAYS = 2;
+
+function daysUntil(dateString) {
+  const ms = new Date(dateString).getTime() - Date.now();
+  return Math.ceil(ms / (1000 * 60 * 60 * 24));
+}
 
 export default function SignPage() {
   const { token } = useParams();
@@ -140,6 +146,14 @@ export default function SignPage() {
         <p className="sign-intro">
           Review the information below, sign in the box, then submit to complete this request.
         </p>
+
+        {client.expiresAt && daysUntil(client.expiresAt) <= WARNING_WINDOW_DAYS && (
+          <p className="sign-expiry-warning">
+            {daysUntil(client.expiresAt) <= 0
+              ? "This link expires today."
+              : `This link expires in ${daysUntil(client.expiresAt)} day${daysUntil(client.expiresAt) === 1 ? "" : "s"}.`}
+          </p>
+        )}
 
         <div className={`field ${errors.name ? "field-error" : ""}`}>
           <label htmlFor="name">Full name</label>

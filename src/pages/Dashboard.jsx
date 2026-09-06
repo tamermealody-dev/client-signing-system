@@ -48,9 +48,10 @@ export default function Dashboard() {
     const form = e.target;
     const name = form.name.value;
     const age = form.age.value;
+    const expiresAt = form.expiresAt.value ? `${form.expiresAt.value}T23:59:59` : null;
     if (!name.trim() || !age) return;
 
-    const result = await createClient({ name, age });
+    const result = await createClient({ name, age, expiresAt });
     setShowForm(false);
     form.reset();
     setJustCreated(result.client);
@@ -107,6 +108,10 @@ export default function Dashboard() {
               <input id="age" name="age" type="number" min="0" max="130" placeholder="25" required />
             </div>
           </div>
+          <div className="field new-client-expiry">
+            <label htmlFor="expiresAt">Expires on (optional)</label>
+            <input id="expiresAt" name="expiresAt" type="date" min={new Date().toISOString().slice(0, 10)} />
+          </div>
           <button type="submit" className="btn btn-primary">
             Generate link &amp; QR code
           </button>
@@ -122,6 +127,11 @@ export default function Dashboard() {
             <p className="created-eyebrow">Request created for</p>
             <h2>{justCreated.name}</h2>
             <p className="mono created-id">{justCreated.token}</p>
+            {justCreated.expiresAt && (
+              <p className="created-expiry">
+                Expires {new Date(justCreated.expiresAt).toLocaleDateString()}
+              </p>
+            )}
             <div className="created-link-row">
               <input
                 readOnly
@@ -184,6 +194,7 @@ export default function Dashboard() {
               <th>Status</th>
               <th>Created</th>
               <th>Signed</th>
+              <th>Expires</th>
               <th aria-label="Actions" />
             </tr>
           </thead>
@@ -202,6 +213,9 @@ export default function Dashboard() {
                 </td>
                 <td>{new Date(c.createdAt).toLocaleDateString()}</td>
                 <td>{c.signedAt ? new Date(c.signedAt).toLocaleDateString() : "—"}</td>
+                <td className={c.status === "expired" ? "ledger-expiry-overdue" : ""}>
+                  {c.expiresAt ? new Date(c.expiresAt).toLocaleDateString() : "—"}
+                </td>
                 <td className="ledger-actions">
                   <button className="btn btn-text" onClick={() => copyLink(c.token)}>
                     Copy link

@@ -57,6 +57,29 @@
   font-weight: 600;
 }
 
+.details-expiry-overdue {
+  color: var(--danger);
+}
+
+.details-expiry-edit {
+  padding-left: 0;
+  margin: -0.4rem 0 var(--space-2);
+}
+
+.details-expiry-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: -0.4rem 0 var(--space-2);
+}
+
+.details-expiry-form input {
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  background: var(--paper-raised);
+}
+
 .details-link-row {
   display: flex;
   gap: var(--space-2);
