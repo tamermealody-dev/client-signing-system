@@ -145,6 +145,18 @@ export async function deleteClient(id) {
   return { success: true };
 }
 
+/** Extend (or set) a pending client's expiry date. SRS §10 lists "Expired" as
+ * an optional status the admin controls via an expiration date. */
+export async function extendExpiry(id, expiresAt) {
+  await delay();
+  const clients = readAll();
+  const idx = clients.findIndex((c) => c.id === id);
+  if (idx === -1) return { success: false };
+  clients[idx] = { ...clients[idx], expiresAt: expiresAt || null };
+  writeAll(clients);
+  return { success: true, client: serialize(clients[idx]) };
+}
+
 /** Admin cancel, distinct from delete - keeps the record but closes the request. */
 export async function cancelClient(id) {
   await delay();
